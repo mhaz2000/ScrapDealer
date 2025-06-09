@@ -9,6 +9,7 @@ using ScrapDealer.Application.Queries.Users;
 
 namespace ScrapDealer.Api.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : BaseController
