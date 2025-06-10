@@ -1,5 +1,4 @@
-﻿using ScrapDealer.Application.Services;
-using ScrapDealer.Infrastructure.EF.Contexts;
+﻿using ScrapDealer.Infrastructure.EF.Contexts;
 using ScrapDealer.Infrastructure.EF.Options;
 using ScrapDealer.Infrastructure.EF.Services;
 using ScrapDealer.Shared.Options;
@@ -9,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ScrapDealer.Infrastructure.EF.Repositories.Base;
 using ScrapDealer.Domain.Repositories.Base;
 using ScrapDealer.Shared.Abstractions.Domain;
+using ScrapDealer.Application.Services.DbReadServices;
 
 namespace ScrapDealer.Infrastructure.EF
 {
@@ -24,6 +24,8 @@ namespace ScrapDealer.Infrastructure.EF
             services.AddDbContext<WriteDbContext>(ctx => ctx.UseSqlServer(options.ConnectionString));
 
             services.AddScoped<IUserReadService, UserReadService>();
+            services.AddScoped<IBuyerReadService, BuyerReadService>();
+            services.AddScoped<ISellerReadService, SellerReadService>();
             services.AddScoped<IRoleReadService, RoleReadService>();
 
 

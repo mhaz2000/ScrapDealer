@@ -2,6 +2,8 @@ using ScrapDealer.Api.Extensions;
 using ScrapDealer.Infrastructure;
 using ScrapDealer.Infrastructure.Logging;
 using ScrapDealer.Shared;
+using ScrapDealer.Shared.Helpers;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +12,12 @@ builder.Services.AddSignalRConfig();
 
 builder.Services.AddInfrastructure(builder.Configuration);
 
-builder.Services.AddControllers();
+
+builder.Services.AddControllers().AddJsonOptions(opt =>
+{
+    opt.JsonSerializerOptions.Converters.Add(new PersianDateTimeConverter());
+    opt.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+});
 
 var app = builder.Build();
 

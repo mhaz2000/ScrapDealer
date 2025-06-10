@@ -15,7 +15,7 @@ namespace ScrapDealer.Infrastructure.EF.Config.Buyers
             builder.HasOne(x => x.User)
                 .WithMany()
                 .HasForeignKey(x => x.UserId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

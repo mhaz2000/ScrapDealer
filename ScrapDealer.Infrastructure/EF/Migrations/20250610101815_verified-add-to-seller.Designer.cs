@@ -12,8 +12,8 @@ using ScrapDealer.Infrastructure.EF.Contexts;
 namespace ScrapDealer.Infrastructure.EF.Migrations
 {
     [DbContext(typeof(ReadDbContext))]
-    [Migration("20250609123048_init")]
-    partial class init
+    [Migration("20250610101815_verified-add-to-seller")]
+    partial class verifiedaddtoseller
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,9 +60,6 @@ namespace ScrapDealer.Infrastructure.EF.Migrations
                     b.Property<string>("NationalCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PersonType")
-                        .HasColumnType("int");
 
                     b.Property<string>("PostalCode")
                         .IsRequired()
@@ -136,6 +133,9 @@ namespace ScrapDealer.Infrastructure.EF.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("PersonType")
+                        .HasColumnType("int");
+
                     b.Property<string>("PostalCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -146,6 +146,9 @@ namespace ScrapDealer.Infrastructure.EF.Migrations
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Verified")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -209,7 +212,7 @@ namespace ScrapDealer.Infrastructure.EF.Migrations
                     b.HasOne("ScrapDealer.Infrastructure.EF.Models.UserReadModel", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.SetNull)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
@@ -220,7 +223,7 @@ namespace ScrapDealer.Infrastructure.EF.Migrations
                     b.HasOne("ScrapDealer.Infrastructure.EF.Models.UserReadModel", "User")
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.SetNull)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Identity.Client;
 using ScrapDealer.Application.DTO;
 using ScrapDealer.Application.Services;
+using ScrapDealer.Application.Services.DbReadServices;
 using ScrapDealer.Domain.Factories.interfaces;
 using ScrapDealer.Domain.Repositories;
 using ScrapDealer.Domain.ValueObjects.Users;

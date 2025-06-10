@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using ScrapDealer.Application.Services;
+using ScrapDealer.Application.Services.DbReadServices;
 using ScrapDealer.Domain.Entities;
 using ScrapDealer.Domain.ValueObjects.Users;
 using ScrapDealer.Infrastructure.EF.Contexts;

@@ -1,4 +1,4 @@
-﻿namespace ScrapDealer.Application.Services
+﻿namespace ScrapDealer.Application.Services.DbReadServices
 {
     public interface IRoleReadService
     {

@@ -23,7 +23,7 @@ namespace ScrapDealer.Infrastructure.EF.Config.Buyers
             builder.HasOne(u => u.User)
                 .WithMany()
                 .HasForeignKey(ur => ur.UserId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.OwnsOne(x => x.Address, address =>
             {

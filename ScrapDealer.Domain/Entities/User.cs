@@ -26,7 +26,7 @@ namespace ScrapDealer.Domain.Entities
         public void SetPassword(PasswordHash passwordHash) 
             => PasswordHash = passwordHash;
 
-        public void AddRole(Role role)
+        public UserRole AddRole(Role role)
         {
             if (role == null)
                 throw new BusinessException("نقش یافت نشد.");
@@ -34,7 +34,11 @@ namespace ScrapDealer.Domain.Entities
             if (_roles.Any(r => r.RoleId == role.Id))
                 throw new BusinessException($"نقش {role.Name} قبلا به کاربر {Username} تخصیص داده شده است.");
 
-            _roles.Add(new UserRole(Id, role.Id));
+            var userRole = new UserRole(Id, role.Id);
+
+            _roles.Add(userRole);
+
+            return userRole;
         }
 
         public void RemoveRole(Role role)

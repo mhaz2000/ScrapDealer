@@ -6,6 +6,7 @@ namespace ScrapDealer.Infrastructure.EF.Models
     {
         public Guid Id { get; set; }
         public bool IsDeleted { get; set; }
+        public bool Verified { get; set; }
         public required string FirstName { get; set; }
         public required string LastName { get; set; }
         public required string NationalCode { get; set; }
@@ -15,6 +16,7 @@ namespace ScrapDealer.Infrastructure.EF.Models
         public required string AddressDescription { get; set; }
         public required string Email { get; set; }
         public Gender Gender { get; set; }
+        public PersonType PersonType { get; set; }
 
         public required UserReadModel User { get; set; }
         public Guid UserId { get; set; }

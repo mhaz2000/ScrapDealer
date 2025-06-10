@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ScrapDealer.Application.Commands.Buyers;
+using ScrapDealer.Application.Commands.Sellers;
+using ScrapDealer.Application.DTO;
 using ScrapDealer.Application.Queries.Buyers;
 using ScrapDealer.Application.Queries.Sellers;
 using ScrapDealer.Shared.Abstractions.Commands;
@@ -24,6 +27,20 @@ namespace ScrapDealer.Api.Controllers
         {
             var result = await _queryDispatcher.QueryAsync(new GetSellerStateQuery(UserId));
             return OkOrNotFound(result);
+        }
+
+        [HttpGet("Profile")]
+        public async Task<ActionResult<SellerProfileDto>> GetProfile()
+        {
+            var result = await _queryDispatcher.QueryAsync(new GetSellerProfileQuery(UserId));
+            return OkOrNotFound(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] CreateSellerCommand command)
+        {
+            await _commandDispatcher.DispatchAsync(command with { UserId = UserId });
+            return BaseOk();
         }
     }
 }

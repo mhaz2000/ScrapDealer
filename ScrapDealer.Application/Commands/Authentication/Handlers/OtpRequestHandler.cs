@@ -17,7 +17,7 @@ namespace ScrapDealer.Application.Commands.Authentication.Handlers
             var phone = Phone.Create(request.Phone); //For normalization
 
             var otpCode = random.Next(100000, 999999);
-            _cacheService.Set(phone, otpCode, TimeSpan.FromMinutes(2));
+            _cacheService.Set(phone, otpCode.ToString(), TimeSpan.FromMinutes(2));
 
             //Sms
 

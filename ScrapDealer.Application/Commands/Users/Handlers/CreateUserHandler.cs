@@ -1,4 +1,5 @@
 ﻿using ScrapDealer.Application.Services;
+using ScrapDealer.Application.Services.DbReadServices;
 using ScrapDealer.Domain.Entities;
 using ScrapDealer.Domain.Factories.interfaces;
 using ScrapDealer.Domain.Repositories;

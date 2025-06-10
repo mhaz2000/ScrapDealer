@@ -1,4 +1,5 @@
 ﻿using ScrapDealer.Application.Services;
+using ScrapDealer.Application.Services.DbReadServices;
 using ScrapDealer.Shared.Abstractions.Commands;
 using ScrapDealer.Shared.Abstractions.Exceptions;
 using System.Security.Claims;
