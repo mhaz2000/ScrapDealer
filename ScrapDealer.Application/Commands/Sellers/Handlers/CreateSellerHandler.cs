@@ -1,15 +1,8 @@
-﻿using ScrapDealer.Application.Commands.Buyers;
-using ScrapDealer.Application.Services.DbReadServices;
-using ScrapDealer.Domain.Entities;
+﻿using ScrapDealer.Application.Services.DbReadServices;
 using ScrapDealer.Domain.Factories.interfaces;
 using ScrapDealer.Domain.Repositories;
 using ScrapDealer.Shared.Abstractions.Commands;
 using ScrapDealer.Shared.Abstractions.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ScrapDealer.Application.Commands.Sellers.Handlers
 {

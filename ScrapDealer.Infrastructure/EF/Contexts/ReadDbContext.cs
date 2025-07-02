@@ -11,6 +11,8 @@ namespace ScrapDealer.Infrastructure.EF.Contexts
         public DbSet<BuyerReadModel> Buyers { get; set; }
         public DbSet<SellerReadModel> Sellers { get; set; }
         public DbSet<UserRoleReadModel> UserRoles { get; set; }
+        public DbSet<CategoryReadModel> Categories { get; set; }
+        public DbSet<SubCategoryReadModel> SubCategories { get; set; }
 
         public ReadDbContext(DbContextOptions<ReadDbContext> options) : base(options)
         {

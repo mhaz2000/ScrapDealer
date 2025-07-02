@@ -13,6 +13,8 @@ namespace ScrapDealer.Infrastructure.EF.Contexts
         public DbSet<Buyer> Buyers { get; set; }
         public DbSet<Seller> Sellers { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<SubCategory> SubCategories { get; set; }
 
         public WriteDbContext(DbContextOptions<WriteDbContext> options) : base(options)
         {
