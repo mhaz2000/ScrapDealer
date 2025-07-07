@@ -13,7 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScrapDealer.Infrastructure.Queries.Handlers
+namespace ScrapDealer.Infrastructure.Queries.Handlers.Sellers
 {
     internal class GetSellerProfileHandler : IQueryHandler<GetSellerProfileQuery, SellerProfileDto>
     {

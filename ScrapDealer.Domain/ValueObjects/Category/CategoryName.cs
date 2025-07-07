@@ -1,4 +1,5 @@
 ﻿using ScrapDealer.Domain.ValueObjects.Base;
+using ScrapDealer.Domain.ValueObjects.Users;
 using ScrapDealer.Shared.Abstractions.Exceptions;
 
 namespace ScrapDealer.Domain.ValueObjects.Category
@@ -23,9 +24,10 @@ namespace ScrapDealer.Domain.ValueObjects.Category
             yield return Value.ToLowerInvariant();
         }
 
-        public override string ToString() => Value;
+        public static implicit operator string(CategoryName username)
+      => username.Value;
 
-        public static implicit operator string(CategoryName name)
-            => name.ToString();
+        public static implicit operator CategoryName(string username)
+            => new(username);
     }
 }

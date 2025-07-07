@@ -11,12 +11,23 @@ namespace ScrapDealer.Domain.Entities
         public Category Category { get; private set; }
         public Guid CategoryId { get; private set; }
 
+        public SubCategory()
+        {
+            
+        }
+
         public SubCategory(SubCategoryPrice price, CategoryName name, Category category)
         {
             Price = price;
             Name = name;
             Category = category; ;
             CategoryId = category.Id;
+        }
+
+        internal void Update(SubCategoryPrice price, CategoryName name)
+        {
+            Price = price;
+            Name = name;
         }
     }
 }

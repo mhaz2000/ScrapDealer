@@ -21,7 +21,7 @@ namespace ScrapDealer.Infrastructure.EF.Config.Categories
 
         public void Configure(EntityTypeBuilder<SubCategoryReadModel> builder)
         {
-            builder.ToTable("Categories");
+            builder.ToTable("SubCategories");
             builder.HasKey(x => x.Id);
 
 

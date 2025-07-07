@@ -11,7 +11,7 @@ using ScrapDealer.Shared.Models;
 using ScrapDealer.Infrastructure.ModuleExtensions;
 using ScrapDealer.Application.Queries.Users;
 
-namespace ScrapDealer.Infrastructure.Queries.Handlers
+namespace ScrapDealer.Infrastructure.Queries.Handlers.Users
 {
     internal sealed class GetUsersHandler : IQueryHandler<GetUsersQuery, PaginatedResult<UserDto>>
     {

@@ -11,7 +11,18 @@ namespace ScrapDealer.Domain.Factories
             var nameValue = CategoryName.Create(name);
             var priceValue = SubCategoryPrice.Create(price);
 
-            return new SubCategory(price, name, category);
+            var subCategory = new SubCategory(price, name, category);
+            category.AddSubCategory(subCategory);
+            return subCategory;
+        }
+
+        public SubCategory Update(CategoryName name, SubCategoryPrice price, SubCategory subCategory)
+        {
+            var nameValue = CategoryName.Create(name);
+            var priceValue = SubCategoryPrice.Create(price);
+
+            subCategory.Update(priceValue, nameValue);
+            return subCategory;
         }
     }
 }

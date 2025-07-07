@@ -4,7 +4,7 @@ using ScrapDealer.Infrastructure.EF.Contexts;
 using ScrapDealer.Infrastructure.EF.Models;
 using ScrapDealer.Shared.Abstractions.Queries;
 
-namespace ScrapDealer.Infrastructure.Queries.Handlers
+namespace ScrapDealer.Infrastructure.Queries.Handlers.Buyers
 {
     internal class GetBuyerStateHandler : IQueryHandler<GetBuyerStateQuery, bool>
     {

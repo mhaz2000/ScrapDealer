@@ -12,7 +12,10 @@ namespace ScrapDealer.Domain.Entities
         private readonly List<SubCategory> _subCategories = new List<SubCategory>();
         public IReadOnlyCollection<SubCategory> SubCategories => _subCategories.AsReadOnly();
 
-
+        public Category()
+        {
+            
+        }
         public void AddSubCategory(SubCategory category)
         {
             if (category == null)
@@ -25,6 +28,11 @@ namespace ScrapDealer.Domain.Entities
         }
 
         public Category(CategoryName name)
+        {
+            Name = name;
+        }
+
+        internal void Update(CategoryName name)
         {
             Name = name;
         }

@@ -2,7 +2,7 @@
 using ScrapDealer.Shared.Abstractions.Exceptions;
 using ScrapDealer.Shared.Abstractions.Queries;
 
-namespace ScrapDealer.Infrastructure.Queries.Handlers
+namespace ScrapDealer.Infrastructure.Queries.Handlers.Files
 {
     internal class DownloadFileHandler : IQueryHandler<DownloadFileQuery, FileStream>
     {

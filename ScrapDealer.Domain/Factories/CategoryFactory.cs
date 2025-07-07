@@ -6,11 +6,18 @@ namespace ScrapDealer.Domain.Factories
 {
     public class CategoryFactory : ICategoryFactory
     {
-        public Category Create(CategoryName name)
+        public Category Create(string name)
         {
             var nameValue = CategoryName.Create(name);
 
             return new Category(nameValue);
+        }
+        public Category Update(string name, Category category)
+        {
+            var nameValue = CategoryName.Create(name);
+            category.Update(nameValue);
+
+            return category;
         }
     }
 }

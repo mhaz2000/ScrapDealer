@@ -6,7 +6,7 @@ using ScrapDealer.Infrastructure.EF.Models;
 using ScrapDealer.Shared.Abstractions.Queries;
 using ScrapDealer.Application.Queries.Users;
 
-namespace ScrapDealer.Infrastructure.Queries.Handlers
+namespace ScrapDealer.Infrastructure.Queries.Handlers.Users
 {
 
     internal sealed class GetUserProfileHandler : IQueryHandler<GetUserProfileQuery, UserDto>
