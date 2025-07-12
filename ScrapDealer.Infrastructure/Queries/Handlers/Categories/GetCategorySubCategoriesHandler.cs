@@ -35,8 +35,8 @@ namespace ScrapDealer.Infrastructure.Queries.Handlers.Categories
                     .Where(u => Microsoft.EntityFrameworkCore.EF.Functions.Like(u.Name, $"%{query.Search}%"));
 
             var subCategories = dbQuery.AsNoTracking();
-            var paginatedResult = await subCategories.
-                ToPaginatedResultAsync<SubCategoryReadModel, SubCategoryDto>(query.PageIndex, query.PageSize, query.SortBy ?? string.Empty, _mapper);
+            var paginatedResult = subCategories.
+                ToPaginatedResult<SubCategoryReadModel, SubCategoryDto>(query.PageIndex, query.PageSize, query.SortBy ?? string.Empty, _mapper);
 
             return paginatedResult;
         }

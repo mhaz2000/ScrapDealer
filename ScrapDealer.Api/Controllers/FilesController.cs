@@ -1,10 +1,8 @@
 ﻿using ScrapDealer.Application.Commands.Files;
-using ScrapDealer.Application.Queries.Files;
 using ScrapDealer.Shared.Abstractions.Commands;
 using ScrapDealer.Shared.Abstractions.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.StaticFiles;
 
 namespace ScrapDealer.Api.Controllers
 {
@@ -23,34 +21,31 @@ namespace ScrapDealer.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> Upload([FromForm] IFormFile file)
+        public async Task<ActionResult<Guid>> Upload([FromForm] IFormFile file, string category)
         {
             using var stream = new MemoryStream();
-
             file.CopyTo(stream);
-            var fileId = await _commandDispatcher.DispatchAsync<UploadFileCommand, Guid>(new UploadFileCommand(stream));
 
-            return OkOrNotFound(fileId);
+            var fileId = await _commandDispatcher.DispatchAsync<UploadFileCommand, Guid>(
+                new UploadFileCommand(stream, category));
+
+            return Ok(fileId);
         }
 
+        [HttpGet("{category}/{id}")]
         [AllowAnonymous]
-        [HttpGet("{id}")]
-        public async Task<IActionResult> Download(Guid id)
+        public async Task<IActionResult> Download(string category, Guid id)
         {
-            var fileName = "image.jpg";
-            var file = await _queryDispatcher.QueryAsync(new DownloadFileQuery(id));
+            var (fileStream, contentType) = await _commandDispatcher
+                .DispatchAsync<DownloadFileCommand, (Stream, string)>(new DownloadFileCommand(id, category));
 
-            var provider = new FileExtensionContentTypeProvider();
-
-            if (!provider.TryGetContentType(fileName, out var contentType))
-            {
-                contentType = "application/octet-stream";
-            }
+            var fileName = $"{id}.dat";
 
             Response.Headers.Append("Access-Control-Allow-Headers", "Content-Disposition");
             Response.Headers.Append("X-Content-Type-Options", "nosniff");
 
-            return File(file, contentType, fileName);
+            return File(fileStream, contentType, fileName);
         }
+
     }
 }

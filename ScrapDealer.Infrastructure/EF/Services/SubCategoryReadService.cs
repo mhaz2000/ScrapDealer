@@ -13,6 +13,6 @@ namespace ScrapDealer.Infrastructure.EF.Services
             => _subCategories = context.SubCategories;
 
         public async Task<bool> ExistsByNameAsync(string name, Guid? excludedId = null)
-            => await _subCategories.AnyAsync(c => c.Name == name && excludedId != null ? c.Id != excludedId : true);
+            => await _subCategories.AnyAsync(c => c.Name == name && (excludedId != null ? c.Id != excludedId : true));
     }
 }

@@ -12,7 +12,7 @@ namespace ScrapDealer.Domain.Factories
         {
             var personNameValue = PersonName.Create(fisrtName, lastName);
             var nationalCodeValue = NationalCode.Create(nationalCode);
-            var addressValue = Address.Create(province, city, postalCode, addressDescription);
+            var addressValue = ProfileAddress.Create(province, city, postalCode, addressDescription);
             var emailValue = Email.Create(email);
 
             return new(personNameValue, nationalCodeValue, addressValue, emailValue, personType, gender, userId);
@@ -23,7 +23,7 @@ namespace ScrapDealer.Domain.Factories
         {
             var personNameValue = PersonName.Create(fisrtName, lastName);
             var nationalCodeValue = NationalCode.Create(nationalCode);
-            var addressValue = Address.Create(province, city, postalCode, addressDescription);
+            var addressValue = ProfileAddress.Create(province, city, postalCode, addressDescription);
             var emailValue = Email.Create(email);
 
             buyer.Update(personNameValue, nationalCodeValue, addressValue, email, personType, gender);

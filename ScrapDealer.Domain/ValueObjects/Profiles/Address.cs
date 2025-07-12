@@ -3,14 +3,14 @@ using ScrapDealer.Shared.Abstractions.Exceptions;
 
 namespace ScrapDealer.Domain.ValueObjects.Profiles
 {
-    public class Address : ValueObject
+    public class ProfileAddress : ValueObject
     {
         public string Province { get; }
         public string City { get; }
         public string PostalCode { get; }
         public string Description { get; }
 
-        private Address(string province, string city, string postalCode, string description)
+        private ProfileAddress(string province, string city, string postalCode, string description)
         {
             if (string.IsNullOrWhiteSpace(province))
                 throw new BusinessException("استان اجباری است.");
@@ -33,8 +33,8 @@ namespace ScrapDealer.Domain.ValueObjects.Profiles
             Description = description.Trim();
         }
 
-        public static Address Create(string province, string city, string postalCode, string description)
-            => new Address(province, city, postalCode, description);
+        public static ProfileAddress Create(string province, string city, string postalCode, string description)
+            => new ProfileAddress(province, city, postalCode, description);
 
         private bool IsValidPostalCode(string postalCode)
         {

@@ -10,6 +10,8 @@ namespace ScrapDealer.Domain.Entities
 
         public Category Category { get; private set; }
         public Guid CategoryId { get; private set; }
+        public bool IsDeleted { get; private set; }
+
 
         public SubCategory()
         {

@@ -1,4 +1,4 @@
-﻿namespace ScrapDealer.Infrastructure.EF.Options
+﻿namespace ScrapDealer.Infrastructure.Options
 {
     public class SqlOptions
     {

@@ -2,5 +2,5 @@
 
 namespace ScrapDealer.Application.Commands.Categories
 {
-    internal record DeleteSubCategoryCommand(Guid Id) : ICommand;
+    public record DeleteSubCategoryCommand(Guid Id) : ICommand;
 }

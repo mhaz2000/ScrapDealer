@@ -9,12 +9,11 @@ namespace ScrapDealer.Infrastructure.Profiles
         public CategoryMappingProfile()
         {
             CreateMap<SubCategoryReadModel, SubCategoryDto>()
-            .ForMember(dest => dest.ParentCategoryId, opt =>
-                opt.MapFrom(src => src.Category.Id));
+                .ConstructUsing(c => new SubCategoryDto(c.Id, c.Name, c.Price, c.CategoryId));
 
             CreateMap<CategoryReadModel, CategoryDto>()
-                .ForMember(dest => dest.SubCategories, opt =>
-                    opt.MapFrom(src => src.SubCategories.Where(sc => !sc.IsDeleted)));
+                .ConstructUsing(c => new CategoryDto(c.Id, c.Name, c.SubCategories.Where(s => !s.IsDeleted)
+                .Select(s => new SubCategoryDto(s.Id, s.Name, s.Price, s.CategoryId)).ToList()));
         }
     }
 }

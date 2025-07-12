@@ -1,5 +1,4 @@
 ﻿using ScrapDealer.Infrastructure.EF.Contexts;
-using ScrapDealer.Infrastructure.EF.Options;
 using ScrapDealer.Infrastructure.EF.Services;
 using ScrapDealer.Shared.Options;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +8,7 @@ using ScrapDealer.Infrastructure.EF.Repositories.Base;
 using ScrapDealer.Domain.Repositories.Base;
 using ScrapDealer.Shared.Abstractions.Domain;
 using ScrapDealer.Application.Services.DbReadServices;
+using ScrapDealer.Infrastructure.Options;
 
 namespace ScrapDealer.Infrastructure.EF
 {

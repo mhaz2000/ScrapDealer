@@ -8,7 +8,7 @@ namespace ScrapDealer.Domain.Entities
     {
         public PersonName PersonName { get; private set; }
         public NationalCode NationalCode { get; private set; }
-        public Address Address { get; private set; }
+        public ProfileAddress Address { get; private set; }
         public Email Email { get; private set; }
         public Gender Gender { get; private set; }
 
@@ -21,7 +21,7 @@ namespace ScrapDealer.Domain.Entities
         }
 
         public Buyer(PersonName personName, NationalCode nationalCode,
-            Address address, Email email, Gender gender, Guid userId)
+            ProfileAddress address, Email email, Gender gender, Guid userId)
         {
             PersonName = personName;
             NationalCode = nationalCode;
@@ -32,7 +32,7 @@ namespace ScrapDealer.Domain.Entities
         }
 
         public void Update(PersonName personName, NationalCode nationalCode,
-            Address address, Email email, Gender gender)
+            ProfileAddress address, Email email, Gender gender)
         {
             PersonName = personName;
             NationalCode = nationalCode;

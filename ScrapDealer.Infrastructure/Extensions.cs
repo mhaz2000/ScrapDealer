@@ -1,15 +1,17 @@
-﻿using ScrapDealer.Application;
-using ScrapDealer.Application.Services;
-using ScrapDealer.Infrastructure.EF;
-using ScrapDealer.Infrastructure.Logging;
-using ScrapDealer.Infrastructure.Services;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using ScrapDealer.Infrastructure.Profiles;
-using Microsoft.AspNetCore.Identity;
+using Minio;
+using ScrapDealer.Application;
+using ScrapDealer.Application.Services;
 using ScrapDealer.Domain.Entities;
-using ScrapDealer.Infrastructure.EF.SeedData;
 using ScrapDealer.Infrastructure.Caching;
+using ScrapDealer.Infrastructure.EF;
+using ScrapDealer.Infrastructure.EF.SeedData;
+using ScrapDealer.Infrastructure.Logging;
+using ScrapDealer.Infrastructure.Options;
+using ScrapDealer.Infrastructure.Profiles;
+using ScrapDealer.Infrastructure.Services;
 
 namespace ScrapDealer.Infrastructure
 {
@@ -22,6 +24,17 @@ namespace ScrapDealer.Infrastructure
             {
                 options.Configuration = configuration.GetValue("Redis:ConnectionString", "localhost:6379,password=123456");
                 options.InstanceName = "ScrapDealer";
+            });
+
+            var minioSettings = configuration.GetSection("Minio").Get<MinioSettings>()!;
+
+            services.AddSingleton(sp =>
+            {
+                return new MinioClient()
+                    .WithEndpoint(minioSettings.Endpoint)
+                    .WithCredentials(minioSettings.AccessKey, minioSettings.SecretKey)
+                    .WithSSL(minioSettings.UseSSL)
+                    .Build();
             });
 
             services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
@@ -37,6 +50,7 @@ namespace ScrapDealer.Infrastructure
             services.AddSingleton<ICaptchaService, CaptchaService>();
             services.AddSingleton<IMemoryCacheService, MemoryCacheService>();
             services.AddSingleton<IRedisCacheService, RedisCacheService>();
+            services.AddSingleton<IFileStorageService, MinioFileStorageService>();
 
             services.AddTransient<DatabaseSeeder>();
 

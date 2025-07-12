@@ -41,6 +41,8 @@ namespace ScrapDealer.Infrastructure.EF.Config.Categories
                 .HasForeignKey(c => c.CategoryId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            builder.HasQueryFilter(p => !p.IsDeleted);
+
         }
     }
 }
