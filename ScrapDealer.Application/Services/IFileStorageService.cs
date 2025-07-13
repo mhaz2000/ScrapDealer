@@ -2,7 +2,7 @@
 {
     public interface IFileStorageService
     {
-        Task<Guid> UploadAsync(Stream fileStream, string contentType, string bucketName);
-        Task<(Stream Stream, string ContentType)> DownloadAsync(Guid fileId, string bucketName);
+        Task<Guid> UploadAsync(MemoryStream fileStream, string originalFileName, string contentType, string bucketName);
+        Task<(Stream Stream, string originalFileName, string ContentType)> DownloadAsync(Guid fileId, string bucketName);
     }
 }

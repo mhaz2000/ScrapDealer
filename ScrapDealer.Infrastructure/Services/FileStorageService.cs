@@ -4,9 +4,9 @@ using ScrapDealer.Application.Services;
 
 public class MinioFileStorageService : IFileStorageService
 {
-    private readonly MinioClient _client;
+    private readonly IMinioClient _client;
 
-    public MinioFileStorageService(MinioClient client)
+    public MinioFileStorageService(IMinioClient client)
     {
         _client = client;
     }
@@ -20,24 +20,30 @@ public class MinioFileStorageService : IFileStorageService
         }
     }
 
-    public async Task<Guid> UploadAsync(Stream fileStream, string contentType, string bucketName)
+    public async Task<Guid> UploadAsync(MemoryStream fileStream, string originalFileName, string contentType, string bucketName)
     {
         await EnsureBucketExists(bucketName);
 
         var fileId = Guid.NewGuid();
         var fileName = $"{fileId}.dat";
 
+        var metadata = new Dictionary<string, string>
+        {
+            { "original-filename", originalFileName }
+        };
+
         await _client.PutObjectAsync(new PutObjectArgs()
             .WithBucket(bucketName)
             .WithObject(fileName)
             .WithStreamData(fileStream)
             .WithObjectSize(fileStream.Length)
-            .WithContentType(contentType));
+            .WithContentType(contentType)
+            .WithHeaders(metadata));
 
         return fileId;
     }
 
-    public async Task<(Stream Stream, string ContentType)> DownloadAsync(Guid fileId, string bucketName)
+    public async Task<(Stream Stream, string originalFileName, string ContentType)> DownloadAsync(Guid fileId, string bucketName)
     {
         var fileName = $"{fileId}.dat";
         var memoryStream = new MemoryStream();
@@ -52,6 +58,11 @@ public class MinioFileStorageService : IFileStorageService
             .WithCallbackStream(stream => stream.CopyTo(memoryStream)));
 
         memoryStream.Position = 0;
-        return (memoryStream, stat.ContentType);
+
+        var originalFileName = stat.MetaData.TryGetValue("original-filename", out var value)
+            ? value ?? $"{fileId}.dat"
+            : $"{fileId}.dat";
+
+        return (memoryStream, originalFileName, stat.ContentType);
     }
 }

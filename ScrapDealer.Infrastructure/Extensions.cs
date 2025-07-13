@@ -26,14 +26,13 @@ namespace ScrapDealer.Infrastructure
                 options.InstanceName = "ScrapDealer";
             });
 
-            var minioSettings = configuration.GetSection("Minio").Get<MinioSettings>()!;
-
-            services.AddSingleton(sp =>
+            services.AddSingleton<IMinioClient>(sp =>
             {
+                var settings = configuration.GetSection("Minio").Get<MinioSettings>()!;
                 return new MinioClient()
-                    .WithEndpoint(minioSettings.Endpoint)
-                    .WithCredentials(minioSettings.AccessKey, minioSettings.SecretKey)
-                    .WithSSL(minioSettings.UseSSL)
+                    .WithEndpoint(settings.Endpoint)
+                    .WithCredentials(settings.AccessKey, settings.SecretKey)
+                    .WithSSL(settings.UseSSL)
                     .Build();
             });
 

@@ -17,6 +17,7 @@ namespace ScrapDealer.Application
             services.AddScoped<IBuyerFactory, BuyerFactory>();
             services.AddScoped<ISubCategoryFactory, SubCategoryFactory>();
             services.AddScoped<ICategoryFactory, CategoryFactory>();
+            services.AddScoped<ISaleOrderFactory, SaleOrderFactory>();
 
             services.AddShared(configuration);
 

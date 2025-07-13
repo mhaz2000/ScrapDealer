@@ -23,11 +23,12 @@ namespace ScrapDealer.Infrastructure.EF
             services.AddDbContext<ReadDbContext>(ctx => ctx.UseSqlServer(options.ConnectionString));
             services.AddDbContext<WriteDbContext>(ctx => ctx.UseSqlServer(options.ConnectionString));
 
+            services.AddScoped<IRoleReadService, RoleReadService>();
             services.AddScoped<IUserReadService, UserReadService>();
             services.AddScoped<IBuyerReadService, BuyerReadService>();
             services.AddScoped<ISellerReadService, SellerReadService>();
-            services.AddScoped<IRoleReadService, RoleReadService>();
             services.AddScoped<ICategoryReadService, CategoryReadService>();
+            services.AddScoped<ISaleOrderReadService, SaleOrderReadService>();
             services.AddScoped<ISubCategoryReadService, SubCategoryReadService>();
 
 

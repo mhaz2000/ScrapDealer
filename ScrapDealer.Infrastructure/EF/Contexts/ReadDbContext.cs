@@ -1,5 +1,5 @@
-﻿using ScrapDealer.Infrastructure.EF.Config;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using ScrapDealer.Infrastructure.EF.Config;
 using ScrapDealer.Infrastructure.EF.Models;
 
 namespace ScrapDealer.Infrastructure.EF.Contexts
@@ -12,6 +12,7 @@ namespace ScrapDealer.Infrastructure.EF.Contexts
         public DbSet<SellerReadModel> Sellers { get; set; }
         public DbSet<UserRoleReadModel> UserRoles { get; set; }
         public DbSet<CategoryReadModel> Categories { get; set; }
+        public DbSet<SaleOrderReadModel> SaleOrders { get; set; }
         public DbSet<SubCategoryReadModel> SubCategories { get; set; }
 
         public ReadDbContext(DbContextOptions<ReadDbContext> options) : base(options)

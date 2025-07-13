@@ -4,6 +4,7 @@ using ScrapDealer.Infrastructure.EF.Config.Users;
 using ScrapDealer.Infrastructure.EF.Models;
 using Microsoft.EntityFrameworkCore;
 using ScrapDealer.Infrastructure.EF.Config.Categories;
+using ScrapDealer.Infrastructure.EF.Config.SaleOrders;
 
 namespace ScrapDealer.Infrastructure.EF.Config
 {
@@ -19,6 +20,7 @@ namespace ScrapDealer.Infrastructure.EF.Config
 
             modelBuilder.ApplyConfiguration(new BuyerReadEntityConfiguration());
             modelBuilder.ApplyConfiguration(new SellerReadEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new SaleOrderReadEntityConfiguration());
         }
 
         public static void ApplyWriteConfigurations(ModelBuilder modelBuilder)
@@ -31,6 +33,7 @@ namespace ScrapDealer.Infrastructure.EF.Config
 
             modelBuilder.ApplyConfiguration(new BuyerWriteEntityConfiguration());
             modelBuilder.ApplyConfiguration(new SellerWriteEntityConfiguration());
+            modelBuilder.ApplyConfiguration(new SaleOrderWriteEntityConfiguration());
         }
     }
 }

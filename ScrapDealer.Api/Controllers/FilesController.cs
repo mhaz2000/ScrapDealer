@@ -21,13 +21,13 @@ namespace ScrapDealer.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Guid>> Upload([FromForm] IFormFile file, string category)
+        public async Task<ActionResult<Guid>> Upload([FromForm] IFormFile file, [FromForm] string category)
         {
             using var stream = new MemoryStream();
             file.CopyTo(stream);
 
             var fileId = await _commandDispatcher.DispatchAsync<UploadFileCommand, Guid>(
-                new UploadFileCommand(stream, category));
+                new UploadFileCommand(stream, file.FileName, category));
 
             return Ok(fileId);
         }
@@ -36,15 +36,15 @@ namespace ScrapDealer.Api.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Download(string category, Guid id)
         {
-            var (fileStream, contentType) = await _commandDispatcher
-                .DispatchAsync<DownloadFileCommand, (Stream, string)>(new DownloadFileCommand(id, category));
+            var (fileStream, originalFileName, contentType) = await _commandDispatcher
+                .DispatchAsync<DownloadFileCommand, (Stream, string, string)>(new DownloadFileCommand(id, category));
 
             var fileName = $"{id}.dat";
 
             Response.Headers.Append("Access-Control-Allow-Headers", "Content-Disposition");
             Response.Headers.Append("X-Content-Type-Options", "nosniff");
 
-            return File(fileStream, contentType, fileName);
+            return File(fileStream, contentType, originalFileName);
         }
 
     }
