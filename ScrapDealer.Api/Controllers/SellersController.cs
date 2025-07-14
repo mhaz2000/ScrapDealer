@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ScrapDealer.Application.Commands.Buyers;
 using ScrapDealer.Application.Commands.Sellers;
 using ScrapDealer.Application.DTO;
@@ -6,6 +7,7 @@ using ScrapDealer.Application.Queries.Buyers;
 using ScrapDealer.Application.Queries.Sellers;
 using ScrapDealer.Shared.Abstractions.Commands;
 using ScrapDealer.Shared.Abstractions.Queries;
+using ScrapDealer.Shared.Models;
 
 namespace ScrapDealer.Api.Controllers
 {
@@ -36,10 +38,26 @@ namespace ScrapDealer.Api.Controllers
             return OkOrNotFound(result);
         }
 
+        [Authorize(Roles = "Admin")]
+        [HttpGet("Admin/Get")]
+        public async Task<ActionResult<PaginatedResult<SellerProfileDto>>> Get([FromQuery] GetSellersQuery query)
+        {
+            var result = await _queryDispatcher.QueryAsync(query);
+            return OkOrNotFound(result);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateSellerCommand command)
         {
             await _commandDispatcher.DispatchAsync(command with { UserId = UserId });
+            return BaseOk();
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPut("Admin/Verify/{id}")]
+        public async Task<IActionResult> Verfiy(Guid id)
+        {
+            await _commandDispatcher.DispatchAsync(new VerifySellerCommand(id));
             return BaseOk();
         }
     }

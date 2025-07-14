@@ -2,16 +2,10 @@
 using Microsoft.EntityFrameworkCore;
 using ScrapDealer.Application.DTO;
 using ScrapDealer.Application.Queries.Sellers;
-using ScrapDealer.Domain.Entities;
 using ScrapDealer.Infrastructure.EF.Contexts;
 using ScrapDealer.Infrastructure.EF.Models;
 using ScrapDealer.Shared.Abstractions.Exceptions;
 using ScrapDealer.Shared.Abstractions.Queries;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ScrapDealer.Infrastructure.Queries.Handlers.Sellers
 {

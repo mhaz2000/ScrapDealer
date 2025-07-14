@@ -3,4 +3,5 @@
 namespace ScrapDealer.Application.Queries.Sellers
 {
     public record GetSellerStateQuery(Guid UserId) : IQuery<bool>;
+
 }

@@ -16,6 +16,10 @@ namespace ScrapDealer.Domain.Entities
         public Guid SellerId { get; private set; }
         public Guid? SubCategoryId { get; private set; }
 
+        public SaleOrder()
+        {
+            
+        }
 
         public SaleOrder(SubCategory? category, Seller seller, SaleType type, SaleOrderDescription? description,
             SaleOrderAddress address, ICollection<Guid> images)

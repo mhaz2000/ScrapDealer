@@ -14,6 +14,8 @@ namespace ScrapDealer.Domain.Entities
 
         public User User { get; private set; }
         public Guid UserId { get; private set; }
+        public bool Verified { get; private set; }
+
 
         public Buyer()
         {
@@ -29,6 +31,7 @@ namespace ScrapDealer.Domain.Entities
             Email = email;
             Gender = gender;
             UserId = userId;
+            Verified = false;
         }
 
         public void Update(PersonName personName, NationalCode nationalCode,
@@ -40,5 +43,7 @@ namespace ScrapDealer.Domain.Entities
             Email = email;
             Gender = gender;
         }
+
+        public void SetAsVerified() => Verified = true;
     }
 }
