@@ -18,10 +18,15 @@ namespace ScrapDealer.Infrastructure.EF
         {
             services.AddHostedService<DbInitializer>();
 
-            var options = configuration.GetOptions<SqlOptions>("Sql");
+            Console.WriteLine(configuration.GetConnectionString("SQL"));
 
-            services.AddDbContext<ReadDbContext>(ctx => ctx.UseSqlServer(options.ConnectionString));
-            services.AddDbContext<WriteDbContext>(ctx => ctx.UseSqlServer(options.ConnectionString));
+            var sqlConnection = configuration.GetConnectionString("SQL")
+                                ?? configuration.GetValue<string>("SQL:ConnectionString")
+                                ?? "Server=localhost;Database=ScrapDealerDB;User Id=sa;Password=Scr@pDe@1er!31372;TrustServerCertificate=True;";
+
+            // Register DbContexts
+            services.AddDbContext<ReadDbContext>(ctx => ctx.UseSqlServer(sqlConnection));
+            services.AddDbContext<WriteDbContext>(ctx => ctx.UseSqlServer(sqlConnection));
 
             services.AddScoped<IRoleReadService, RoleReadService>();
             services.AddScoped<IUserReadService, UserReadService>();

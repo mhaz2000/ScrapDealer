@@ -22,13 +22,23 @@ namespace ScrapDealer.Infrastructure
             services.AddMemoryCache();
             services.AddStackExchangeRedisCache(options =>
             {
-                options.Configuration = configuration.GetValue("Redis:ConnectionString", "localhost:6379,password=123456");
+                var redisConnection = configuration["Redis:ConnectinString"]
+                                      ?? "localhost:6379,password=123456";
+                options.Configuration = redisConnection;
                 options.InstanceName = "ScrapDealer";
             });
 
             services.AddSingleton<IMinioClient>(sp =>
             {
-                var settings = configuration.GetSection("Minio").Get<MinioSettings>()!;
+                var settings = new MinioSettings
+                {
+                    Endpoint = configuration["Minio:Endpoint"] ?? "localhost:9000",
+                    AccessKey = configuration["Minio:AccessKey"] ?? "admin",
+                    SecretKey = configuration["Minio:SecretKey"] ?? "admin123",
+                    BucketName = configuration["Minio:BucketName"] ?? "filestorage",
+                    UseSSL = bool.Parse(configuration["Minio:UseSSL"] ?? "false")
+                };
+
                 return new MinioClient()
                     .WithEndpoint(settings.Endpoint)
                     .WithCredentials(settings.AccessKey, settings.SecretKey)
