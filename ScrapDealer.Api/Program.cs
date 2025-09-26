@@ -20,7 +20,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowNextJsFrontend", policy =>
     {
-        policy.WithOrigins("http://localhost:3000", "http://45.159.150.33") 
+        policy.WithOrigins("http://localhost:3000", "http://45.159.150.33:3000") 
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials();
@@ -29,13 +29,14 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
+app.UseCors("AllowNextJsFrontend");
+
 app.UseShared();
 app.UseMiddleware<LoggingMiddleware>();
 app.UseSignalR();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.UseCors("AllowNextJsFrontend");
 
 app.MapControllers();
 
